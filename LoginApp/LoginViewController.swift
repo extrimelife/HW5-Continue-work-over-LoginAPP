@@ -21,6 +21,7 @@ class LoginViewController: UIViewController {
     private let password = "Password"
     
     
+    //MARK: - Переопределенные методы
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTextField()
@@ -31,55 +32,45 @@ class LoginViewController: UIViewController {
         removeKeyboardNotifications()
     }
     
-    //MARK: - Метод для скрытия клавиатуры по тапу на любую часть экрана
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        let press: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        press.cancelsTouchesInView = false
-        view.addGestureRecognizer(press)
-        
-    }
-    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
     
     
-    //MARK: - Seque.destination(Вперед)
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let greetingVc = segue.destination as? GreetingViewController else { return }
         greetingVc.userLabel = loginTextField.text
         greetingVc.modalPresentationStyle = .overCurrentContext
     }
     
-    //MARK: - IBAction LoginButton
+    //MARK: - IBAction UIButton
     @IBAction func loginButtonAction() {
-        guard loginTextField.text == "User" && passwordTextField.text == "Password" else {
+        guard loginTextField.text == login && passwordTextField.text == password else {
             showAlert(title: "Invalid login or password", message: "Please enter correct login and password")
             return
         }
     }
     
     
-    //MARK: - IBAction ForgotUserNameAction
     @IBAction func forgotUserNameAction() {
         showAlert(title: "Oops!", message: "Your name is \(login) \u{1F609}")
     }
     
     
-    //MARK: - IBAction ForgotPasswordAction
     @IBAction func forgotPasswordAction() {
         showAlert(title: "Oops!", message: "Your password is \(password) \u{1F609}")
     }
     
-    //MARK: - IBAction UIStoryboardSeque/Segue.source(Назад)
+    
     @IBAction func unwindSeque(_ seque: UIStoryboardSegue) {
-        guard let _ = seque.source as? GreetingViewController else { return }
         loginTextField.text = ""
         passwordTextField.text = ""
     }
     
-    //MARK: - Setting for the UITextField
+    //MARK: - Приватные методы
     private func setupTextField() {
         let textFields = [loginTextField, passwordTextField]
         let textFieldPlaceholder = ["User Name", "Password"]
@@ -92,7 +83,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    //MARK: - Setting for the UIButton
     private func setupButton() {
         let buttons = [loginButton, forgetUserNameButton, forgetPasswordButton]
         let buttonNames = ["Log In", "Forgot User Name?", "Forgot Password?"]

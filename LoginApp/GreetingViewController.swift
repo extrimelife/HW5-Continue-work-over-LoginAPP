@@ -24,7 +24,7 @@ class GreetingViewController: UIViewController {
         setupButton()
     }
     
-    //MARK: - Setting for the Greeting UILabel
+    //MARK: - Приватные методы
     private func setupLabel() {
         let labels = [welcomeLabel, userNameLabel, handGreetingLabel]
         let namesLabel = ["Welcome,", "", "\u{1F44B}"]
@@ -41,7 +41,7 @@ class GreetingViewController: UIViewController {
         }
     }
     
-    //MARK: - Setting for the UIButton LogOut
+
     private func setupButton() {
         logOutButton.setTitle("Log out", for: .normal)
         logOutButton.tintColor = .white
