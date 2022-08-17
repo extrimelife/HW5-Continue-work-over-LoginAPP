@@ -9,7 +9,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    
+    //MARK: - IBOutlets
     @IBOutlet var loginTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
@@ -17,8 +17,10 @@ class LoginViewController: UIViewController {
     @IBOutlet var forgetUserNameButton: UIButton!
     @IBOutlet var forgetPasswordButton: UIButton!
     
-    private let login = "User"
-    private let password = "Password"
+    //MARK: - Приватные свойства
+    private var login = ""
+    private var password = ""
+    private var modelUser = User.userModel()
     
     
     //MARK: - Переопределенные методы
@@ -26,6 +28,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupTextField()
         setupButton()
+        setupModelUser(model: modelUser[0])
         registerForKeyboardNotifications()
     }
     deinit {
@@ -38,15 +41,29 @@ class LoginViewController: UIViewController {
         view.endEditing(true)
     }
     
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let greetingVc = segue.destination as? GreetingViewController else { return }
-        greetingVc.userLabel = loginTextField.text
-        greetingVc.modalPresentationStyle = .overCurrentContext
+        guard let tabBar = segue.destination as? UITabBarController else { return }
+        guard let viewControllers = tabBar.viewControllers else { return }
+        tabBar.modalPresentationStyle = .overCurrentContext
+        for viewController in viewControllers {
+            if let greetingVc = viewController as? GreetingViewController {
+                greetingVc.userLabel = loginTextField.text
+                greetingVc.tabBarItem.title = "Home"
+                greetingVc.tabBarItem.image = UIImage(systemName: "house.fill")
+            } else if let naviController = viewController as? UINavigationController {
+                if let userVc = naviController.topViewController as? UserViewController {
+                    userVc.navigationItem.title = loginTextField.text
+                    userVc.view.backgroundColor = .systemCyan
+                    userVc.navigationItem.backButtonTitle = "Back"
+                    userVc.navigationController?.navigationBar.tintColor = .black
+                    userVc.tabBarItem.title = "User"
+                    userVc.tabBarItem.image = UIImage(systemName: "person.fill")
+                }
+            }
+        }
     }
     
-    //MARK: - IBAction UIButton
+    //MARK: - IBAction 
     @IBAction func loginButtonAction() {
         guard loginTextField.text == login && passwordTextField.text == password else {
             showAlert(title: "Invalid login or password", message: "Please enter correct login and password")
@@ -92,6 +109,11 @@ class LoginViewController: UIViewController {
             
         }
     }
+    
+    private func setupModelUser(model: User) {
+        login = model.login
+        password = model.password
+    }
 }
 
 
@@ -128,3 +150,5 @@ extension LoginViewController {
         view.bounds.origin = CGPoint.zero
     }
 }
+
+

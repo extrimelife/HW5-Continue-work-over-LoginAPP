@@ -15,13 +15,13 @@ class GreetingViewController: UIViewController {
     
     @IBOutlet var logOutButton: UIButton!
     
-    //MARK: - переменная для хранения имени пользователя
     var userLabel: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLabel()
         setupButton()
+        setupNavigationController()
     }
     
     //MARK: - Приватные методы
@@ -48,4 +48,15 @@ class GreetingViewController: UIViewController {
         logOutButton.titleLabel?.font = UIFont.systemFont(ofSize: 25, weight: .bold)
     }
     
+}
+
+extension GreetingViewController {
+    private func setupNavigationController() {
+        let navigationBar = UINavigationBarAppearance()
+        navigationBar.configureWithOpaqueBackground()
+        navigationController?.navigationBar.standardAppearance = navigationBar
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationBar
+    
+        
+    }
 }
