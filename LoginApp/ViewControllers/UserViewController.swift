@@ -13,33 +13,39 @@ class UserViewController: UIViewController {
     @IBOutlet var profileButton: UIButton!
     
     @IBOutlet var userImage: UIImageView!
-    
+        
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var surnameLabel: UILabel!
     @IBOutlet var ageLabel: UILabel!
     @IBOutlet var townLabel: UILabel!
     @IBOutlet var jobLabel: UILabel!
     
-    //MARK: - Приватные свойства
-    private let personModel = Person.personModel()
-    
+    var user: User!
     
     //MARK: - Переопределенные методы
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButton()
         setupLabel()
-        setupModelPerson(personModel[0])
+        setupModelPerson()
+       
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let aboutMe = segue.destination as? AboutMeViewController else { return }
+        aboutMe.user = user
+        
     }
     
     //MARK: - Приватные методы
-    private func setupModelPerson(_ model: Person) {
-        userImage.image = UIImage(named: model.image)
-        nameLabel.text = model.name
-        surnameLabel.text = model.surname
-        ageLabel.text = model.age
-        townLabel.text = model.city
-        jobLabel.text = model.work
+    private func setupModelPerson() {
+        view.addVerticalGradientLayer()
+        userImage.image = UIImage(named: user.person.image)
+        nameLabel.text = "Имя: \(user.person.name)"
+        surnameLabel.text = "Фамилия: \(user.person.surname)"
+        ageLabel.text = "Возраст: \(user.person.age)"
+        townLabel.text = "Город: \(user.person.city)"
+        jobLabel.text = "Работа: \(user.person.work)"
     }
     
     private func setupButton() {
@@ -58,3 +64,5 @@ class UserViewController: UIViewController {
         }
     }
 }
+    
+

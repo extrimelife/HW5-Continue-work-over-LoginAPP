@@ -17,6 +17,7 @@
 		B75230B728A597FE008AA269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B75230B528A597FE008AA269 /* Main.storyboard */; };
 		B75230B928A59800008AA269 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B75230B828A59800008AA269 /* Assets.xcassets */; };
 		B75230BC28A59800008AA269 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B75230BA28A59800008AA269 /* LaunchScreen.storyboard */; };
+		B7869A1428B014D1006B536B /* extention + GradientUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7869A1328B014D1006B536B /* extention + GradientUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		B75230B828A59800008AA269 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B75230BB28A59800008AA269 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B75230BD28A59800008AA269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7869A1328B014D1006B536B /* extention + GradientUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extention + GradientUIView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 				B734B49928A6DDAB0018AF81 /* GreetingViewController.swift */,
 				B745909628ABFB7700F03B27 /* UserViewController.swift */,
 				B745909D28AC119700F03B27 /* AboutMeViewController.swift */,
+				B7869A1328B014D1006B536B /* extention + GradientUIView.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				B75230B028A597FE008AA269 /* AppDelegate.swift in Sources */,
 				B75230B228A597FE008AA269 /* SceneDelegate.swift in Sources */,
 				B745909E28AC119700F03B27 /* AboutMeViewController.swift in Sources */,
+				B7869A1428B014D1006B536B /* extention + GradientUIView.swift in Sources */,
 				B734B49A28A6DDAB0018AF81 /* GreetingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

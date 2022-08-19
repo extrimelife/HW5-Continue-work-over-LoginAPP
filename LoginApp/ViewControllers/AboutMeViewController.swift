@@ -11,16 +11,17 @@ class AboutMeViewController: UIViewController {
     
     @IBOutlet var aboutMeLabel: UILabel!
     
-    private let modelPerson = Person.personModel()
+    var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupModelAboutMe(modelPerson[0])
-        setupLabel() 
+        setupModelAboutMe()
+        setupLabel()
     }
     
-    private func setupModelAboutMe(_ model: Person) {
-        aboutMeLabel.text = model.hobby
+    private func setupModelAboutMe() {
+        view.addVerticalGradientLayer()
+        aboutMeLabel.text = user.person.hobby
         
     }
     

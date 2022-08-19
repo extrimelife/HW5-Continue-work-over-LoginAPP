@@ -9,27 +9,29 @@ import UIKit
 
 class GreetingViewController: UIViewController {
     
+    //MARK: - IBOutlets
     @IBOutlet var welcomeLabel: UILabel!
-    @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var handGreetingLabel: UILabel!
     
     @IBOutlet var logOutButton: UIButton!
     
-    var userLabel: String!
+    //MARK: - PublicProperty
+    var user: User!
     
+    //MARK: Переопределенные методы
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLabel()
         setupButton()
-        setupNavigationController()
     }
     
     //MARK: - Приватные методы
     private func setupLabel() {
-        let labels = [welcomeLabel, userNameLabel, handGreetingLabel]
-        let namesLabel = ["Welcome,", "", "\u{1F44B}"]
+        let labels = [welcomeLabel, handGreetingLabel]
+        let namesLabel = ["", "\u{1F44B}"]
+        view.addVerticalGradientLayer()
         for (index, label) in labels.enumerated() {
-            userNameLabel.text = userLabel
+            welcomeLabel.text = "Welcome, \(user.person.fullName)!"
             guard let label = label else { return }
             label.text = namesLabel[index]
             label.textColor = .white
@@ -50,13 +52,4 @@ class GreetingViewController: UIViewController {
     
 }
 
-extension GreetingViewController {
-    private func setupNavigationController() {
-        let navigationBar = UINavigationBarAppearance()
-        navigationBar.configureWithOpaqueBackground()
-        navigationController?.navigationBar.standardAppearance = navigationBar
-        navigationController?.navigationBar.scrollEdgeAppearance = navigationBar
-    
-        
-    }
-}
+

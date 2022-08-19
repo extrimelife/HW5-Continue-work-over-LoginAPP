@@ -17,10 +17,12 @@ class LoginViewController: UIViewController {
     @IBOutlet var forgetUserNameButton: UIButton!
     @IBOutlet var forgetPasswordButton: UIButton!
     
+   
     //MARK: - Приватные свойства
-    private var login = ""
-    private var password = ""
-    private var modelUser = User.userModel()
+    private var login = User.userModel().login
+    private var password = User.userModel().password
+    
+    private let user = User.userModel()
     
     
     //MARK: - Переопределенные методы
@@ -28,7 +30,6 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupTextField()
         setupButton()
-        setupModelUser(model: modelUser[0])
         registerForKeyboardNotifications()
     }
     deinit {
@@ -47,13 +48,13 @@ class LoginViewController: UIViewController {
         tabBar.modalPresentationStyle = .overCurrentContext
         for viewController in viewControllers {
             if let greetingVc = viewController as? GreetingViewController {
-                greetingVc.userLabel = loginTextField.text
+                greetingVc.user = user
                 greetingVc.tabBarItem.title = "Home"
                 greetingVc.tabBarItem.image = UIImage(systemName: "house.fill")
             } else if let naviController = viewController as? UINavigationController {
                 if let userVc = naviController.topViewController as? UserViewController {
+                    userVc.user = user
                     userVc.navigationItem.title = loginTextField.text
-                    userVc.view.backgroundColor = .systemCyan
                     userVc.navigationItem.backButtonTitle = "Back"
                     userVc.navigationController?.navigationBar.tintColor = .black
                     userVc.tabBarItem.title = "User"
@@ -65,7 +66,7 @@ class LoginViewController: UIViewController {
     
     //MARK: - IBAction 
     @IBAction func loginButtonAction() {
-        guard loginTextField.text == login && passwordTextField.text == password else {
+        guard loginTextField.text == user.login && passwordTextField.text == user.password else {
             showAlert(title: "Invalid login or password", message: "Please enter correct login and password")
             return
         }
@@ -73,12 +74,12 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func forgotUserNameAction() {
-        showAlert(title: "Oops!", message: "Your name is \(login) \u{1F609}")
+        showAlert(title: "Oops!", message: "Your name is \(user.login) \u{1F609}")
     }
     
     
     @IBAction func forgotPasswordAction() {
-        showAlert(title: "Oops!", message: "Your password is \(password) \u{1F609}")
+        showAlert(title: "Oops!", message: "Your password is \(user.password) \u{1F609}")
     }
     
     
@@ -108,11 +109,6 @@ class LoginViewController: UIViewController {
             button.setTitle(buttonNames[index], for: .normal)
             
         }
-    }
-    
-    private func setupModelUser(model: User) {
-        login = model.login
-        password = model.password
     }
 }
 
